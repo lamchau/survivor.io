@@ -149,174 +149,54 @@
 
     <div id="imageSelection">
       <p>Select image:</p>
+      <script>
+        const imageMappings = [
+          { key: "q", src: "images/zombie.png" },
+          { key: "w", src: "images/cat.png" },
+          { key: "e", src: "images/bear.png" },
+          { key: "r", src: "images/wes.png" },
+          { key: "a", src: "images/none.png" },
+          { key: "s", src: "images/book.png" },
+          { key: "d", src: "images/king.png" },
+          { key: "f", src: "images/common.png" },
+          { key: "z", src: "images/robot.png" },
+          { key: "x", src: "images/dog.png" },
+          { key: "c", src: "images/snake.png" },
+          { key: "v", src: "images/default.png" },
+          { key: "b", src: "images/bronze.png" },
+          { key: "n", src: "images/silver.png" },
+          { key: "m", src: "images/diamond.png" },
+          { key: "1", src: "images/platinum.png" },
+          { key: "2", src: "images/crown.png" },
+          { key: "3", src: "images/unicorn.png" },
+          { key: "4", src: "images/blackhorse.png" },
+        ];
 
-      <div class="image-container">
-        <img
-          src="images/zombie.png"
-          alt="zombie"
-          onclick="selectImage('images/zombie.png')"
-        />
-        <span class="keyboard-shortcut">Q</span>
-      </div>
-      <div class="image-container">
-        <img
-          src="images/cat.png"
-          alt="cat"
-          onclick="selectImage('images/cat.png')"
-        />
-        <span class="keyboard-shortcut">W</span>
-      </div>
-      <div class="image-container">
-        <img
-          src="images/bear.png"
-          alt="bear"
-          onclick="selectImage('images/bear.png')"
-        />
-        <span class="keyboard-shortcut">E</span>
-      </div>
-      <div class="image-container">
-        <img
-          src="images/wes.png"
-          alt="wes"
-          onclick="selectImage('images/wes.png')"
-        />
-        <span class="keyboard-shortcut">R</span>
-      </div>
+        imageMappings.forEach((mapping) => {
+          document.write(
+            `<div class="image-container">
+          <img
+            src="${mapping.src}"
+            alt="${mapping.src.split("/").pop().split(".")[0]}"
+            onclick="selectImage('${mapping.src}')"
+          />
+          <span class="keyboard-shortcut">${mapping.key.toUpperCase()}</span>
+        </div>`,
+          );
+        });
+      </script>
 
-      <div class="image-container">
-        <img
-          src="images/none.png"
-          alt="none"
-          onclick="selectImage('images/none.png')"
-        />
-        <span class="keyboard-shortcut">A</span>
-      </div>
-      <div class="image-container">
-        <img
-          src="images/book.png"
-          alt="book"
-          onclick="selectImage('images/book.png')"
-        />
-        <span class="keyboard-shortcut">S</span>
-      </div>
-      <div class="image-container">
-        <img
-          src="images/king.png"
-          alt="king"
-          onclick="selectImage('images/king.png')"
-        />
-        <span class="keyboard-shortcut">D</span>
-      </div>
-      <div class="image-container">
-        <img
-          src="images/common.png"
-          alt="common"
-          onclick="selectImage('images/common.png')"
-        />
-        <span class="keyboard-shortcut">F</span>
-      </div>
-
-      <div class="image-container">
-        <img
-          src="images/robot.png"
-          alt="robot"
-          onclick="selectImage('images/robot.png')"
-        />
-        <span class="keyboard-shortcut">Z</span>
-      </div>
-      <div class="image-container">
-        <img
-          src="images/dog.png"
-          alt="dog"
-          onclick="selectImage('images/dog.png')"
-        />
-        <span class="keyboard-shortcut">X</span>
-      </div>
-      <div class="image-container">
-        <img
-          src="images/snake.png"
-          alt="snake"
-          onclick="selectImage('images/snake.png')"
-        />
-        <span class="keyboard-shortcut">C</span>
-      </div>
-      <div class="image-container">
-        <img
-          src="images/default.png"
-          alt="default"
-          onclick="selectImage('images/default.png')"
-        />
-        <span class="keyboard-shortcut">V</span>
-      </div>
-
-      <div class="image-container">
-        <img
-          src="images/bronze.png"
-          alt="bronze"
-          onclick="selectImage('images/bronze.png')"
-        />
-        <span class="keyboard-shortcut">B</span>
-      </div>
-      <div class="image-container">
-        <img
-          src="images/silver.png"
-          alt="silver"
-          onclick="selectImage('images/silver.png')"
-        />
-        <span class="keyboard-shortcut">N</span>
-      </div>
-      <div class="image-container">
-        <img
-          src="images/diamond.png"
-          alt="diamond"
-          onclick="selectImage('images/diamond.png')"
-        />
-        <span class="keyboard-shortcut">M</span>
-      </div>
-      <div class="image-container">
-        <img
-          src="images/platinum.png"
-          alt="platinum"
-          onclick="selectImage('images/platinum.png')"
-        />
-        <span class="keyboard-shortcut">1</span>
-      </div>
-
-      <div class="image-container">
-        <img
-          src="images/crown.png"
-          alt="crown"
-          onclick="selectImage('images/crown.png')"
-        />
-        <span class="keyboard-shortcut">2</span>
-      </div>
-      <div class="image-container">
-        <img
-          src="images/unicorn.png"
-          alt="unicorn"
-          onclick="selectImage('images/unicorn.png')"
-        />
-        <span class="keyboard-shortcut">3</span>
-      </div>
-      <div class="image-container">
-        <img
-          src="images/blackhorse.png"
-          alt="den"
-          onclick="selectImage('images/blackhorse.png')"
-        />
-        <span class="keyboard-shortcut">4</span>
-      </div>
       <button onclick="closeImageSelection()">Cancel</button>
 
       <script>
         document.addEventListener("keydown", function (event) {
           const key = event.key.toLowerCase();
-          if (shortcuts.includes(key)) {
-            const img = imageShortcuts[key];
-            if (img) {
-              selectImage(img.src);
+
+          imageMappings.forEach((mapping) => {
+            if (mapping.key === key) {
+              selectImage(mapping.src);
             }
-          }
+          });
         });
       </script>
     </div>
