@@ -83,7 +83,15 @@
         </button>
       </div>
       <script language="javascript">
+        function isDialogClosed() {
+          return (
+            document.getElementById("imageSelection").style.display == "none"
+          );
+        }
         document.addEventListener("keydown", (event) => {
+          if (isDialogClosed()) {
+            return;
+          }
           const key = event.key.toLowerCase();
 
           imageMappings.forEach((mapping) => {
@@ -92,61 +100,26 @@
             }
           });
         });
-
-        document.addEventListener("keydown", (event) => {
-          if (event.key === "Escape") {
-            closeImageSelection();
-          }
-        });
       </script>
     </div>
     <script>
       let selectedCell;
       const cells = document.querySelectorAll("td");
       const imageShortcuts = {};
-      const shortcuts = [
-        "q",
-        "w",
-        "e",
-        "r",
-        "a",
-        "s",
-        "d",
-        "f",
-        "z",
-        "x",
-        "c",
-        "v",
-        "b",
-        "n",
-        "m",
-      ];
       const imgElements = document.querySelectorAll("#imageSelection img");
-      // Map images to keyboard shortcuts
-      Array.from(imgElements).forEach((img, index) => {
-        if (index < shortcuts.length) {
-          imageShortcuts[shortcuts[index]] = img;
-        }
-      });
       cells.forEach((cell) => {
         cell.addEventListener("click", function () {
           selectedCell = this;
           openImageSelection();
         });
-        cell.addEventListener("keydown", function (event) {
-          const key = event.key.toLowerCase();
-          if (shortcuts.includes(key)) {
-            selectedCell = this;
-            openImageSelection();
-            handleImageSelectionShortcut(event);
-          }
-        });
       });
+
       function openImageSelection() {
         const imageSelection = document.getElementById("imageSelection");
         const overlay = document.getElementById("overlay");
         imageSelection.style.display = "block";
         overlay.style.display = "block";
+
         const rect = selectedCell.getBoundingClientRect();
         const offsetTop =
           window.pageYOffset || document.documentElement.scrollTop;
@@ -155,12 +128,25 @@
         imageSelection.style.top = rect.top + offsetTop + "px";
         imageSelection.style.left = rect.left + offsetLeft + rect.width + "px";
         imageSelection.style.transform = "none";
+
         document.addEventListener("keydown", handleImageSelectionShortcut);
       }
+
+      function handleImageSelectionShortcut(event) {
+        if (isDialogClosed()) {
+          return;
+        }
+        const key = event.key.toLowerCase();
+        if (key === "escape") {
+          closeImageSelection();
+        }
+      }
+
       function closeImageSelection() {
         document.getElementById("imageSelection").style.display = "none";
         document.getElementById("overlay").style.display = "none";
       }
+
       function selectImage(imageSrc) {
         const imageCount = document.querySelectorAll(
           `img[src='${imageSrc}']`,
@@ -171,9 +157,10 @@
           }
           closeImageSelection();
         } else {
-          showToast("You cannot have more than two of the same image.");
+          showToast("error: image already selected 2 times");
         }
       }
+
       function showToast(message) {
         const toast = document.createElement("div");
         toast.className = "toast";
