@@ -21,18 +21,10 @@ img {
   height: 100%;
   object-fit: cover;
   border-radius: 10px;
-  transition:
-    transform 0.3s,
-    box-shadow 0.3s;
 }
 
 img:hover {
-  transform: scale(1.1);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-.black {
-  background-color: black;
 }
 
 #imageSelection {
@@ -50,7 +42,7 @@ img:hover {
     0 4px 8px rgba(0, 0, 0, 0.1),
     0 6px 20px rgba(0, 0, 0, 0.1);
   width: 300px;
-  max-height: 90%; /* To ensure it fits within smaller screens */
+  max-height: 90%;
   overflow-y: auto; /* To handle overflow of content */
 }
 
@@ -72,12 +64,6 @@ img:hover {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 50;
-  opacity: 0;
-}
-
-#overlay.show {
-  display: block;
-  opacity: 1;
 }
 
 #resetButton {
@@ -111,4 +97,3 @@ body {
   padding: 2px 5px;
   border-radius: 3px;
 }
-
