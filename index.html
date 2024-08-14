@@ -3,132 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bảng event survivor - Clan VNClub</title>
-    <style>
-      table {
-        width: 300px;
-        height: 300px;
-        border-collapse: collapse;
-        margin: 20px auto;
-      }
-
-      td {
-        width: 60px;
-        height: 60px;
-        border: 1px solid black;
-        text-align: center;
-        cursor: pointer;
-        overflow: hidden;
-        position: relative;
-        border-radius: 10px;
-      }
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 10px;
-        transition:
-          transform 0.3s,
-          box-shadow 0.3s;
-      }
-
-      img:hover {
-        transform: scale(1.1);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-      }
-
-      .black {
-        background-color: black;
-      }
-
-      #imageSelection {
-        display: none;
-        position: fixed;
-        background-color: white;
-        padding: 10px;
-        border: 1px solid black;
-        z-index: 100;
-        border-radius: 10px;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        box-shadow:
-          0 4px 8px rgba(0, 0, 0, 0.1),
-          0 6px 20px rgba(0, 0, 0, 0.1);
-        width: 400px;
-        max-height: 90%; /* To ensure it fits within smaller screens */
-        overflow-y: auto; /* To handle overflow of content */
-      }
-
-      #imageSelection img {
-        width: 50px;
-        height: 50px;
-        margin: 5px;
-        cursor: pointer;
-        object-fit: contain;
-        border-radius: 5px;
-      }
-
-      #overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 50;
-        opacity: 0;
-      }
-
-      #overlay.show {
-        display: block;
-        opacity: 1;
-      }
-
-      #resetButton {
-        display: block;
-        margin: 20px auto;
-        padding: 10px 20px;
-        background-color: red;
-        color: white;
-        border: none;
-        cursor: pointer;
-        font-size: 16px;
-        border-radius: 5px;
-      }
-    </style>
-
-    <title>Crown Pair Match - VNClub</title>
+    <title>survivor.io event</title>
+    <title>Crown Pair Match</title>
+    <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Proxima+Nova"
     />
-    <style>
-      body {
-        font-family: "Proxima Nova", sans-serif;
-      }
-      .image-container {
-        display: inline-block;
-        position: relative;
-      }
-
-      .keyboard-shortcut {
-        position: absolute;
-        top: 5px;
-        left: 5px;
-        background-color: rgba(0, 0, 0, 0.5);
-        color: white;
-        padding: 2px 5px;
-        border-radius: 3px;
-      }
-    </style>
   </head>
-
   <body>
-    <h1 style="text-align: center">Crown Pair Match - VNClub</h1>
-
+    <h1 style="text-align: center">Crown Pair Match</h1>
     <table id="interactiveTable">
       <script>
         const defaultImageSrc = "images/default.png";
@@ -143,10 +27,8 @@
         }
       </script>
     </table>
-
     <button id="resetButton" onclick="resetTable()">Reset</button>
     <div id="overlay" onclick="closeImageSelection()"></div>
-
     <div id="imageSelection">
       <p>Select image:</p>
       <script>
@@ -185,9 +67,7 @@
           );
         });
       </script>
-
       <button onclick="closeImageSelection()">Cancel</button>
-
       <script>
         document.addEventListener("keydown", function (event) {
           const key = event.key.toLowerCase();
@@ -200,7 +80,6 @@
         });
       </script>
     </div>
-
     <script>
       let selectedCell;
       const cells = document.querySelectorAll("td");
@@ -223,7 +102,6 @@
         "m",
       ];
       const imgElements = document.querySelectorAll("#imageSelection img");
-
       // Map images to keyboard shortcuts
       Array.from(imgElements).forEach((img, index) => {
         if (index < shortcuts.length) {
@@ -235,7 +113,6 @@
           selectedCell = this;
           openImageSelection();
         });
-
         cell.addEventListener("keydown", function (event) {
           const key = event.key.toLowerCase();
           if (shortcuts.includes(key)) {
@@ -245,38 +122,31 @@
           }
         });
       });
-
       function openImageSelection() {
         const imageSelection = document.getElementById("imageSelection");
         const overlay = document.getElementById("overlay");
         imageSelection.style.display = "block";
         overlay.style.display = "block";
-
         const rect = selectedCell.getBoundingClientRect();
         const offsetTop =
           window.pageYOffset || document.documentElement.scrollTop;
         const offsetLeft =
           window.pageXOffset || document.documentElement.scrollLeft;
-
         imageSelection.style.top = rect.top + offsetTop + "px";
         imageSelection.style.left = rect.left + offsetLeft + rect.width + "px";
         imageSelection.style.transform = "none";
-
         document.addEventListener("keydown", handleImageSelectionShortcut);
       }
-
       function closeImageSelection() {
         document.getElementById("imageSelection").style.display = "none";
         document.getElementById("overlay").style.display = "none";
       }
-
       function selectImage(imageSrc) {
         if (selectedCell) {
           selectedCell.innerHTML = `<img src="${imageSrc}" alt="Selected Image">`;
         }
         closeImageSelection();
       }
-
       function resetTable() {
         cells.forEach((cell) => {
           cell.innerHTML = `<img src="${defaultImageSrc}" alt="Default Image">`;
