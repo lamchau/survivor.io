@@ -77,9 +77,13 @@
           );
         });
       </script>
-      <div class="button-container"><button id="cancelButton" onclick="closeImageSelection()">Cancel</button></div>
-      <script>
-        document.addEventListener("keydown", function (event) {
+      <div class="button-container">
+        <button id="cancelButton" onclick="closeImageSelection()">
+          Cancel
+        </button>
+      </div>
+      <script language="javascript">
+        document.addEventListener("keydown", (event) => {
           const key = event.key.toLowerCase();
 
           imageMappings.forEach((mapping) => {
@@ -89,7 +93,7 @@
           });
         });
 
-        document.addEventListener("keydown", function (event) {
+        document.addEventListener("keydown", (event) => {
           if (event.key === "Escape") {
             closeImageSelection();
           }
@@ -184,6 +188,7 @@
       }
 
       function resetTable() {
+        const defaultImageSrc = "images/default.png";
         cells.forEach((cell) => {
           cell.innerHTML = `<img src="${defaultImageSrc}" alt="Default Image">`;
           cell.classList.remove("black");
