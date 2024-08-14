@@ -182,16 +182,9 @@
        * @param {string} imageSrc - The source URL of the image to select.
        */
       const selectImage = (imageSrc) => {
-        const imageCount = document.querySelectorAll(
-          `img[src='${imageSrc}']`,
-        ).length;
-        if (imageSrc === "images/default.png" || imageCount < 3) {
-          if (selectedCell) {
-            selectedCell.innerHTML = `<img src="${imageSrc}" alt="Selected Image">`;
-          }
+        if (selectedCell) {
+          selectedCell.innerHTML = `<img src="${imageSrc}" alt="Selected Image">`;
           closeCardDialog();
-        } else {
-          showToast("error: image already selected 2 times");
         }
       };
 
