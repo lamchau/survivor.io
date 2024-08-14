@@ -32,7 +32,7 @@
     <!-- dialog -->
     <div id="selectCardDialog">
       <p>Select image:</p>
-      <div id="toastContainer"></div>
+
       <div class="image-container-placeholder"></div>
       <div class="button-container">
         <button id="cancelButton" onclick="closeCardDialog()">Cancel</button>
@@ -45,28 +45,28 @@
        * the keys.
        */
       const imageMappings = [
-        { key: "1", src: "images/zombie.png" },
-        { key: "2", src: "images/cat.png" },
-        { key: "3", src: "images/bear.png" },
+        { key: "1", src: "images/common.png" },
+        { key: "2", src: "images/king.png" },
+        { key: "3", src: "images/cat.png" },
         { key: "4", src: "images/wes.png" },
-        { key: "5", src: "images/none.png" },
+        { key: "5", src: "images/book.png" },
 
-        { key: "q", src: "images/book.png" },
-        { key: "w", src: "images/king.png" },
-        { key: "e", src: "images/common.png" },
-        { key: "r", src: "images/robot.png" },
-        { key: "t", src: "images/dog.png" },
+        { key: "q", src: "images/bear.png" },
+        { key: "w", src: "images/none.png" },
+        { key: "e", src: "images/unicorn.png" },
+        { key: "r", src: "images/crown.png" },
+        { key: "t", src: "images/default.png" },
 
-        { key: "a", src: "images/snake.png" },
-        { key: "s", src: "images/default.png" },
-        { key: "d", src: "images/bronze.png" },
-        { key: "f", src: "images/silver.png" },
-        { key: "g", src: "images/diamond.png" },
+        { key: "a", src: "images/dog.png" },
+        { key: "s", src: "images/snake.png" },
+        { key: "d", src: "images/robot.png" },
+        { key: "f", src: "images/zombie.png" },
+        { key: "g", src: "images/blackhorse.png" },
 
-        { key: "z", src: "images/platinum.png" },
-        { key: "x", src: "images/crown.png" },
-        { key: "c", src: "images/unicorn.png" },
-        { key: "v", src: "images/blackhorse.png" },
+        { key: "z", src: "images/bronze.png" },
+        { key: "x", src: "images/silver.png" },
+        { key: "c", src: "images/platinum.png" },
+        { key: "v", src: "images/diamond.png" },
       ];
 
       imageMappings.forEach((mapping) => {
@@ -186,23 +186,6 @@
           selectedCell.innerHTML = `<img src="${imageSrc}" alt="Selected Image">`;
           closeCardDialog();
         }
-      };
-
-      /**
-       * Shows a toast message.
-       * @param {string} message - The message to display in the toast.
-       */
-      const showToast = (message) => {
-        const toast = document.createElement("div");
-        toast.className = "toast";
-        toast.textContent = message;
-        document.getElementById("toastContainer").appendChild(toast);
-        setTimeout(() => {
-          toast.classList.add("fade");
-          setTimeout(() => {
-            toast.remove();
-          }, 250);
-        }, 250);
       };
 
       /**
