@@ -114,3 +114,8 @@ body {
 .toast.fade {
   opacity: 0;
 }
+/* right aligh button */
+.button-container {
+  text-align: right;
+  margin-top: 10px; /* Add spacing if needed */
+}
