@@ -1,196 +1,596 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bảng event survivor - Clan VNClub</title>
     <style>
-        table {
-            width: 300px;
-            height: 300px;
-            border-collapse: collapse;
-            margin: 20px auto;
-        }
+      table {
+        width: 300px;
+        height: 300px;
+        border-collapse: collapse;
+        margin: 20px auto;
+      }
 
-        td {
-            width: 60px;
-            height: 60px;
-            border: 1px solid black;
-            text-align: center;
-            cursor: pointer;
-            overflow: hidden;
-            position: relative;
-            border-radius: 10px;
-        }
+      td {
+        width: 60px;
+        height: 60px;
+        border: 1px solid black;
+        text-align: center;
+        cursor: pointer;
+        overflow: hidden;
+        position: relative;
+        border-radius: 10px;
+      }
 
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 10px;
-        }
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+      }
 
-        .black {
-            background-color: black;
-        }
+      .black {
+        background-color: black;
+      }
 
-        #imageSelection {
-            display: none;
-            position: fixed;
-            background-color: white;
-            padding: 10px;
-            border: 1px solid black;
-            z-index: 100;
-            border-radius: 10px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
-            max-width: 90%; /* To ensure it fits within smaller screens */
-            max-height: 90%; /* To ensure it fits within smaller screens */
-            overflow-y: auto; /* To handle overflow of content */
-        }
+      #imageSelection {
+        display: none;
+        position: fixed;
+        background-color: white;
+        padding: 10px;
+        border: 1px solid black;
+        z-index: 100;
+        border-radius: 10px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow:
+          0 4px 8px rgba(0, 0, 0, 0.1),
+          0 6px 20px rgba(0, 0, 0, 0.1);
+        width: 400px;
+        max-height: 90%; /* To ensure it fits within smaller screens */
+        overflow-y: auto; /* To handle overflow of content */
+      }
 
-        #imageSelection img {
-            width: 50px;
-            height: 50px;
-            margin: 5px;
-            cursor: pointer;
-            object-fit: contain;
-            border-radius: 5px;
-        }
+      #imageSelection img {
+        width: 50px;
+        height: 50px;
+        margin: 5px;
+        cursor: pointer;
+        object-fit: contain;
+        border-radius: 5px;
+      }
 
-        #overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 50;
-            opacity: 0;
-        }
+      #overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 50;
+        opacity: 0;
+      }
 
-        #overlay.show {
-            display: block;
-            opacity: 1;
-        }
+      #overlay.show {
+        display: block;
+        opacity: 1;
+      }
 
-        #resetButton {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            background-color: red;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            border-radius: 5px;
-        }
+      #resetButton {
+        display: block;
+        margin: 20px auto;
+        padding: 10px 20px;
+        background-color: red;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 5px;
+      }
     </style>
 
     <title>Crown Pair Match - VNClub</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Proxima+Nova">
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Proxima+Nova"
+    />
     <style>
-        body {
-            font-family: 'Proxima Nova', sans-serif;
-        }
+      body {
+        font-family: "Proxima Nova", sans-serif;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-    <h1 style="text-align: center;">Crown Pair Match - VNClub</h1>
+  <body>
+    <h1 style="text-align: center">Crown Pair Match - VNClub</h1>
 
     <table id="interactiveTable">
-        <script>
-            const defaultImageSrc = 'images/default.png';
-            for (let i = 0; i < 5; i++) {
-                document.write('<tr>');
-                for (let j = 0; j < 5; j++) {
-                    document.write(`<td><img src="${defaultImageSrc}" alt="Default Image"></td>`);
-                }
-                document.write('</tr>');
-            }
-        </script>
+      <script>
+        const defaultImageSrc = "images/default.png";
+        for (let i = 0; i < 5; i++) {
+          document.write("<tr>");
+          for (let j = 0; j < 5; j++) {
+            document.write(
+              `<td><img src="${defaultImageSrc}" alt="Default Image"></td>`,
+            );
+          }
+          document.write("</tr>");
+        }
+      </script>
     </table>
 
     <button id="resetButton" onclick="resetTable()">Reset</button>
     <div id="overlay" onclick="closeImageSelection()"></div>
 
     <div id="imageSelection">
-        <p>Select image:</p>
-        <img src="images/zombie.png" alt="zombie" onclick="selectImage('images/zombie.png')">
-        <img src="images/cat.png" alt="cat" onclick="selectImage('images/cat.png')">
-        <img src="images/bear.png" alt="bear" onclick="selectImage('images/bear.png')">
-        <img src="images/wes.png" alt="wes" onclick="selectImage('images/wes.png')"> <br>
+      <p>Select image:</p>
 
-        <img src="images/none.png" alt="none" onclick="selectImage('images/none.png')">
-        <img src="images/book.png" alt="book" onclick="selectImage('images/book.png')">
-        <img src="images/king.png" alt="king" onclick="selectImage('images/king.png')">
-        <img src="images/common.png" alt="common" onclick="selectImage('images/common.png')"> <br>
+      <div style="display: inline-block; position: relative">
+        <img
+          src="images/zombie.png"
+          alt="zombie"
+          onclick="selectImage('images/zombie.png')"
+        />
+        <span
+          style="
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 2px 5px;
+            border-radius: 3px;
+          "
+          >Q</span
+        >
+      </div>
+      <div style="display: inline-block; position: relative">
+        <img
+          src="images/cat.png"
+          alt="cat"
+          onclick="selectImage('images/cat.png')"
+        />
+        <span
+          style="
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 2px 5px;
+            border-radius: 3px;
+          "
+          >W</span
+        >
+      </div>
+      <div style="display: inline-block; position: relative">
+        <img
+          src="images/bear.png"
+          alt="bear"
+          onclick="selectImage('images/bear.png')"
+        />
+        <span
+          style="
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 2px 5px;
+            border-radius: 3px;
+          "
+          >E</span
+        >
+      </div>
+      <div style="display: inline-block; position: relative">
+        <img
+          src="images/wes.png"
+          alt="wes"
+          onclick="selectImage('images/wes.png')"
+        />
+        <span
+          style="
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 2px 5px;
+            border-radius: 3px;
+          "
+          >R</span
+        >
+      </div>
 
-        <img src="images/robot.png" alt="robot" onclick="selectImage('images/robot.png')">
-        <img src="images/dog.png" alt="dog" onclick="selectImage('images/dog.png')">
-        <img src="images/snake.png" alt="snake" onclick="selectImage('images/snake.png')">
-        <img src="images/default.png" alt="default" onclick="selectImage('images/default.png')"> <br>
+      <div style="display: inline-block; position: relative">
+        <img
+          src="images/none.png"
+          alt="none"
+          onclick="selectImage('images/none.png')"
+        />
+        <span
+          style="
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 2px 5px;
+            border-radius: 3px;
+          "
+          >A</span
+        >
+      </div>
+      <div style="display: inline-block; position: relative">
+        <img
+          src="images/book.png"
+          alt="book"
+          onclick="selectImage('images/book.png')"
+        />
+        <span
+          style="
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 2px 5px;
+            border-radius: 3px;
+          "
+          >S</span
+        >
+      </div>
+      <div style="display: inline-block; position: relative">
+        <img
+          src="images/king.png"
+          alt="king"
+          onclick="selectImage('images/king.png')"
+        />
+        <span
+          style="
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 2px 5px;
+            border-radius: 3px;
+          "
+          >D</span
+        >
+      </div>
+      <div style="display: inline-block; position: relative">
+        <img
+          src="images/common.png"
+          alt="common"
+          onclick="selectImage('images/common.png')"
+        />
+        <span
+          style="
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 2px 5px;
+            border-radius: 3px;
+          "
+          >F</span
+        >
+      </div>
 
-        <img src="images/bronze.png" alt="bronze" onclick="selectImage('images/bronze.png')">
-        <img src="images/silver.png" alt="silver" onclick="selectImage('images/silver.png')">
-        <img src="images/diamond.png" alt="diamond" onclick="selectImage('images/diamond.png')">
-        <img src="images/platinum.png" alt="platinum" onclick="selectImage('images/platinum.png')"> <br>
+      <div style="display: inline-block; position: relative">
+        <img
+          src="images/robot.png"
+          alt="robot"
+          onclick="selectImage('images/robot.png')"
+        />
+        <span
+          style="
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 2px 5px;
+            border-radius: 3px;
+          "
+          >Z</span
+        >
+      </div>
+      <div style="display: inline-block; position: relative">
+        <img
+          src="images/dog.png"
+          alt="dog"
+          onclick="selectImage('images/dog.png')"
+        />
+        <span
+          style="
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 2px 5px;
+            border-radius: 3px;
+          "
+          >X</span
+        >
+      </div>
+      <div style="display: inline-block; position: relative">
+        <img
+          src="images/snake.png"
+          alt="snake"
+          onclick="selectImage('images/snake.png')"
+        />
+        <span
+          style="
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 2px 5px;
+            border-radius: 3px;
+          "
+          >C</span
+        >
+      </div>
+      <div style="display: inline-block; position: relative">
+        <img
+          src="images/default.png"
+          alt="default"
+          onclick="selectImage('images/default.png')"
+        />
+        <span
+          style="
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 2px 5px;
+            border-radius: 3px;
+          "
+          >V</span
+        >
+      </div>
 
-        <img src="images/crown.png" alt="crown" onclick="selectImage('images/crown.png')">
-        <img src="images/unicorn.png" alt="unicorn" onclick="selectImage('images/unicorn.png')">
-        <img src="images/blackhorse.png" alt="den" onclick="selectImage('images/blackhorse.png')">
-        <button onclick="closeImageSelection()">Cancel</button>
+      <div style="display: inline-block; position: relative">
+        <img
+          src="images/bronze.png"
+          alt="bronze"
+          onclick="selectImage('images/bronze.png')"
+        />
+        <span
+          style="
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 2px 5px;
+            border-radius: 3px;
+          "
+          >B</span
+        >
+      </div>
+      <div style="display: inline-block; position: relative">
+        <img
+          src="images/silver.png"
+          alt="silver"
+          onclick="selectImage('images/silver.png')"
+        />
+        <span
+          style="
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 2px 5px;
+            border-radius: 3px;
+          "
+          >N</span
+        >
+      </div>
+      <div style="display: inline-block; position: relative">
+        <img
+          src="images/diamond.png"
+          alt="diamond"
+          onclick="selectImage('images/diamond.png')"
+        />
+        <span
+          style="
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 2px 5px;
+            border-radius: 3px;
+          "
+          >M</span
+        >
+      </div>
+      <div style="display: inline-block; position: relative">
+        <img
+          src="images/platinum.png"
+          alt="platinum"
+          onclick="selectImage('images/platinum.png')"
+        />
+        <span
+          style="
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 2px 5px;
+            border-radius: 3px;
+          "
+          >1</span
+        >
+      </div>
+
+      <div style="display: inline-block; position: relative">
+        <img
+          src="images/crown.png"
+          alt="crown"
+          onclick="selectImage('images/crown.png')"
+        />
+        <span
+          style="
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 2px 5px;
+            border-radius: 3px;
+          "
+          >2</span
+        >
+      </div>
+      <div style="display: inline-block; position: relative">
+        <img
+          src="images/unicorn.png"
+          alt="unicorn"
+          onclick="selectImage('images/unicorn.png')"
+        />
+        <span
+          style="
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 2px 5px;
+            border-radius: 3px;
+          "
+          >3</span
+        >
+      </div>
+      <div style="display: inline-block; position: relative">
+        <img
+          src="images/blackhorse.png"
+          alt="den"
+          onclick="selectImage('images/blackhorse.png')"
+        />
+        <span
+          style="
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 2px 5px;
+            border-radius: 3px;
+          "
+          >4</span
+        >
+      </div>
+      <button onclick="closeImageSelection()">Cancel</button>
+
+      <script>
+        document.addEventListener("keydown", function (event) {
+          const key = event.key.toLowerCase();
+          if (shortcuts.includes(key)) {
+            const img = imageShortcuts[key];
+            if (img) {
+              selectImage(img.src);
+            }
+          }
+        });
+      </script>
     </div>
 
     <script>
-        let selectedCell;
-        const cells = document.querySelectorAll('td');
-        cells.forEach(cell => {
-            cell.addEventListener('click', function() {
-                selectedCell = this;
-                openImageSelection();
-            });
+      let selectedCell;
+      const cells = document.querySelectorAll("td");
+      const imageShortcuts = {};
+      const shortcuts = [
+        "q",
+        "w",
+        "e",
+        "r",
+        "a",
+        "s",
+        "d",
+        "f",
+        "z",
+        "x",
+        "c",
+        "v",
+        "b",
+        "n",
+        "m",
+      ];
+      const imgElements = document.querySelectorAll("#imageSelection img");
+
+      // Map images to keyboard shortcuts
+      Array.from(imgElements).forEach((img, index) => {
+        if (index < shortcuts.length) {
+          imageShortcuts[shortcuts[index]] = img;
+        }
+      });
+      cells.forEach((cell) => {
+        cell.addEventListener("click", function () {
+          selectedCell = this;
+          openImageSelection();
         });
 
-        function openImageSelection(event) {
-            const imageSelection = document.getElementById('imageSelection');
-            const overlay = document.getElementById('overlay');
-            imageSelection.style.display = 'block';
-            overlay.style.display = 'block';
+        cell.addEventListener("keydown", function (event) {
+          const key = event.key.toLowerCase();
+          if (shortcuts.includes(key)) {
+            selectedCell = this;
+            openImageSelection();
+            handleImageSelectionShortcut(event);
+          }
+        });
+      });
 
-            const rect = selectedCell.getBoundingClientRect();
-            const offsetTop = window.pageYOffset || document.documentElement.scrollTop;
-            const offsetLeft = window.pageXOffset || document.documentElement.scrollLeft;
+      function openImageSelection() {
+        const imageSelection = document.getElementById("imageSelection");
+        const overlay = document.getElementById("overlay");
+        imageSelection.style.display = "block";
+        overlay.style.display = "block";
 
-            imageSelection.style.top = rect.top + offsetTop + 'px';
-            imageSelection.style.left = rect.left + offsetLeft + rect.width + 'px';
-            imageSelection.style.transform = 'none';
+        const rect = selectedCell.getBoundingClientRect();
+        const offsetTop =
+          window.pageYOffset || document.documentElement.scrollTop;
+        const offsetLeft =
+          window.pageXOffset || document.documentElement.scrollLeft;
+
+        imageSelection.style.top = rect.top + offsetTop + "px";
+        imageSelection.style.left = rect.left + offsetLeft + rect.width + "px";
+        imageSelection.style.transform = "none";
+
+        document.addEventListener("keydown", handleImageSelectionShortcut);
+      }
+
+      function closeImageSelection() {
+        document.getElementById("imageSelection").style.display = "none";
+        document.getElementById("overlay").style.display = "none";
+      }
+
+      function selectImage(imageSrc) {
+        if (selectedCell) {
+          selectedCell.innerHTML = `<img src="${imageSrc}" alt="Selected Image">`;
         }
+        closeImageSelection();
+      }
 
-        function closeImageSelection() {
-            document.getElementById('imageSelection').style.display = 'none';
-            document.getElementById('overlay').style.display = 'none';
-        }
-
-        function selectImage(imageSrc) {
-            if (selectedCell) {
-                selectedCell.innerHTML = `<img src="${imageSrc}" alt="Selected Image">`;
-            }
-            closeImageSelection();
-        }
-
-        function resetTable() {
-            cells.forEach(cell => {
-                cell.innerHTML = `<img src="${defaultImageSrc}" alt="Default Image">`;
-                cell.classList.remove('black');
-            });
-        }
+      function resetTable() {
+        cells.forEach((cell) => {
+          cell.innerHTML = `<img src="${defaultImageSrc}" alt="Default Image">`;
+          cell.classList.remove("black");
+        });
+      }
     </script>
-</body>
-
+  </body>
 </html>
+
