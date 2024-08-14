@@ -83,11 +83,11 @@
         </button>
       </div>
       <script language="javascript">
-        function isDialogClosed() {
+        const isDialogClosed = () => {
           return (
             document.getElementById("imageSelection").style.display == "none"
           );
-        }
+        };
         document.addEventListener("keydown", (event) => {
           if (isDialogClosed()) {
             return;
@@ -114,7 +114,7 @@
         });
       });
 
-      function openImageSelection() {
+      const openImageSelection = () => {
         const imageSelection = document.getElementById("imageSelection");
         const overlay = document.getElementById("overlay");
         imageSelection.style.display = "block";
@@ -130,9 +130,9 @@
         imageSelection.style.transform = "none";
 
         document.addEventListener("keydown", handleImageSelectionShortcut);
-      }
+      };
 
-      function handleImageSelectionShortcut(event) {
+      const handleImageSelectionShortcut = (event) => {
         if (isDialogClosed()) {
           return;
         }
@@ -140,14 +140,14 @@
         if (key === "escape") {
           closeImageSelection();
         }
-      }
+      };
 
-      function closeImageSelection() {
+      const closeImageSelection = () => {
         document.getElementById("imageSelection").style.display = "none";
         document.getElementById("overlay").style.display = "none";
-      }
+      };
 
-      function selectImage(imageSrc) {
+      const selectImage = (imageSrc) => {
         const imageCount = document.querySelectorAll(
           `img[src='${imageSrc}']`,
         ).length;
@@ -159,9 +159,9 @@
         } else {
           showToast("error: image already selected 2 times");
         }
-      }
+      };
 
-      function showToast(message) {
+      const showToast = (message) => {
         const toast = document.createElement("div");
         toast.className = "toast";
         toast.textContent = message;
@@ -172,15 +172,15 @@
             toast.remove();
           }, 250);
         }, 250);
-      }
+      };
 
-      function resetTable() {
+      const resetTable = () => {
         const defaultImageSrc = "images/default.png";
         cells.forEach((cell) => {
           cell.innerHTML = `<img src="${defaultImageSrc}" alt="Default Image">`;
           cell.classList.remove("black");
         });
-      }
+      };
     </script>
   </body>
 </html>
