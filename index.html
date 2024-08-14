@@ -30,6 +30,7 @@
     <div id="overlay" onclick="closeImageSelection()"></div>
     <div id="imageSelection">
       <p>Select image:</p>
+      <div id="toastContainer"></div>
       <script>
         const imageMappings = [
           { key: "1", src: "images/zombie.png" },
@@ -141,11 +142,31 @@
         document.getElementById("overlay").style.display = "none";
       }
       function selectImage(imageSrc) {
-        if (selectedCell) {
-          selectedCell.innerHTML = `<img src="${imageSrc}" alt="Selected Image">`;
+        const imageCount = document.querySelectorAll(
+          `img[src='${imageSrc}']`,
+        ).length;
+        if (imageSrc === 'images/default.png' || imageCount < 3) {
+          if (selectedCell) {
+            selectedCell.innerHTML = `<img src="${imageSrc}" alt="Selected Image">`;
+          }
+          closeImageSelection();
+        } else {
+          showToast("You cannot have more than two of the same image.");
         }
-        closeImageSelection();
       }
+      function showToast(message) {
+        const toast = document.createElement("div");
+        toast.className = "toast";
+        toast.textContent = message;
+        document.getElementById("toastContainer").appendChild(toast);
+        setTimeout(() => {
+          toast.classList.add("fade");
+          setTimeout(() => {
+            toast.remove();
+          }, 250);
+        }, 250);
+      }
+
       function resetTable() {
         cells.forEach((cell) => {
           cell.innerHTML = `<img src="${defaultImageSrc}" alt="Default Image">`;

@@ -97,3 +97,20 @@ body {
   padding: 2px 5px;
   border-radius: 3px;
 }
+
+.toast {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  border-radius: 5px;
+  z-index: 1000;
+  opacity: 1;
+  transition: opacity 250ms;
+}
+
+.toast.fade {
+  opacity: 0;
+}
