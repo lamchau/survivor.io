@@ -27,7 +27,7 @@ img:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-#imageSelection {
+#selectCardDialog {
   display: none;
   position: fixed;
   background-color: white;
@@ -46,7 +46,7 @@ img:hover {
   overflow-y: auto; /* To handle overflow of content */
 }
 
-#imageSelection img {
+#selectCardDialog img {
   width: 50px;
   height: 50px;
   margin: 5px;

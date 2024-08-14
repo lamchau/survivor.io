@@ -28,19 +28,18 @@
       </script>
     </table>
     <button id="resetButton" onclick="resetTable()">Reset</button>
-    <div id="overlay" onclick="closeImageSelection()"></div>
-    <div id="imageSelection">
+    <div id="overlay" onclick="closeCardDialog()"></div>
+    <!-- dialog -->
+    <div id="selectCardDialog">
       <p>Select image:</p>
       <div id="toastContainer"></div>
       <div class="image-container-placeholder"></div>
       <div class="button-container">
-        <button id="cancelButton" onclick="closeImageSelection()">
-          Cancel
-        </button>
+        <button id="cancelButton" onclick="closeCardDialog()">Cancel</button>
       </div>
     </div>
 
-    <script>
+    <script language="javascript">
       const imageMappings = [
         { key: "1", src: "images/zombie.png" },
         { key: "2", src: "images/cat.png" },
@@ -69,7 +68,11 @@
       imageMappings.forEach((mapping) => {
         const { key, src } = mapping;
         const alt = mapping.src.split("/").pop().split(".")[0];
-        document.querySelector('.image-container-placeholder').insertAdjacentHTML('beforeend', `
+        document
+          .querySelector(".image-container-placeholder")
+          .insertAdjacentHTML(
+            "beforeend",
+            `
           <div class="image-container">
             <img
               src="${src}"
@@ -80,16 +83,17 @@
               ${key.toUpperCase()}
             </span>
           </div>
-        `);
+        `,
+          );
       });
 
-      const isDialogClosed = () => {
+      const isCardDialogClosed = () => {
         return (
-          document.getElementById("imageSelection").style.display == "none"
+          document.getElementById("selectCardDialog").style.display == "none"
         );
       };
       document.addEventListener("keydown", (event) => {
-        if (isDialogClosed()) {
+        if (isCardDialogClosed()) {
           return;
         }
         const key = event.key.toLowerCase();
@@ -104,18 +108,18 @@
       let selectedCell;
       const cells = document.querySelectorAll("td");
       const imageShortcuts = {};
-      const imgElements = document.querySelectorAll("#imageSelection img");
+      const imgElements = document.querySelectorAll("#selectCardDialog img");
       cells.forEach((cell) => {
         cell.addEventListener("click", function () {
           selectedCell = this;
-          openImageSelection();
+          openCardDialog();
         });
       });
 
-      const openImageSelection = () => {
-        const imageSelection = document.getElementById("imageSelection");
+      const openCardDialog = () => {
+        const selectCardDialog = document.getElementById("selectCardDialog");
         const overlay = document.getElementById("overlay");
-        imageSelection.style.display = "block";
+        selectCardDialog.style.display = "block";
         overlay.style.display = "block";
 
         const rect = selectedCell.getBoundingClientRect();
@@ -123,25 +127,26 @@
           window.pageYOffset || document.documentElement.scrollTop;
         const offsetLeft =
           window.pageXOffset || document.documentElement.scrollLeft;
-        imageSelection.style.top = rect.top + offsetTop + "px";
-        imageSelection.style.left = rect.left + offsetLeft + rect.width + "px";
-        imageSelection.style.transform = "none";
+        selectCardDialog.style.top = rect.top + offsetTop + "px";
+        selectCardDialog.style.left =
+          rect.left + offsetLeft + rect.width + "px";
+        selectCardDialog.style.transform = "none";
 
-        document.addEventListener("keydown", handleImageSelectionShortcut);
+        document.addEventListener("keydown", handleCardDialogShortcut);
       };
 
-      const handleImageSelectionShortcut = (event) => {
-        if (isDialogClosed()) {
+      const handleCardDialogShortcut = (event) => {
+        if (isCardDialogClosed()) {
           return;
         }
         const key = event.key.toLowerCase();
         if (key === "escape") {
-          closeImageSelection();
+          closeCardDialog();
         }
       };
 
-      const closeImageSelection = () => {
-        document.getElementById("imageSelection").style.display = "none";
+      const closeCardDialog = () => {
+        document.getElementById("selectCardDialog").style.display = "none";
         document.getElementById("overlay").style.display = "none";
       };
 
@@ -153,7 +158,7 @@
           if (selectedCell) {
             selectedCell.innerHTML = `<img src="${imageSrc}" alt="Selected Image">`;
           }
-          closeImageSelection();
+          closeCardDialog();
         } else {
           showToast("error: image already selected 2 times");
         }
