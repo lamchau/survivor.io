@@ -41,7 +41,7 @@ img:hover {
   box-shadow:
     0 4px 8px rgba(0, 0, 0, 0.1),
     0 6px 20px rgba(0, 0, 0, 0.1);
-  width: 300px;
+  width: 330px;
   max-height: 90%;
   overflow-y: auto; /* To handle overflow of content */
 }
@@ -114,6 +114,11 @@ body {
 .toast.fade {
   opacity: 0;
 }
+
+h1 {
+  text-align: center;
+}
+
 /* right aligh button */
 .button-container {
   text-align: right;

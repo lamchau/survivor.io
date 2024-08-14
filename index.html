@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Crown Pair Match</title>
+    <title>survivor.io - Crown Pair Match</title>
     <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
@@ -11,15 +11,16 @@
     />
   </head>
   <body>
-    <h1 style="text-align: center">Crown Pair Match</h1>
+    <h1>Crown Pair Match</h1>
     <table id="interactiveTable">
-      <script>
-        const defaultImageSrc = "images/default.png";
-        for (let i = 0; i < 5; i++) {
+      <script language="javascript">
+        const rows = 5;
+        const columns = 5;
+        for (let i = 0; i < rows; i++) {
           document.write("<tr>");
-          for (let j = 0; j < 5; j++) {
+          for (let j = 0; j < columns; j++) {
             document.write(
-              `<td><img src="${defaultImageSrc}" alt="Default Image"></td>`,
+              `<td><img src="images/default.png" alt="Default Image"></td>`,
             );
           }
           document.write("</tr>");
@@ -38,32 +39,41 @@
           { key: "3", src: "images/bear.png" },
           { key: "4", src: "images/wes.png" },
           { key: "5", src: "images/none.png" },
+
           { key: "q", src: "images/book.png" },
           { key: "w", src: "images/king.png" },
           { key: "e", src: "images/common.png" },
           { key: "r", src: "images/robot.png" },
           { key: "t", src: "images/dog.png" },
-          { key: "y", src: "images/snake.png" },
-          { key: "a", src: "images/default.png" },
-          { key: "s", src: "images/bronze.png" },
-          { key: "d", src: "images/silver.png" },
-          { key: "f", src: "images/diamond.png" },
-          { key: "g", src: "images/platinum.png" },
-          { key: "z", src: "images/crown.png" },
-          { key: "x", src: "images/unicorn.png" },
-          { key: "c", src: "images/blackhorse.png" },
+
+          { key: "a", src: "images/snake.png" },
+          { key: "s", src: "images/default.png" },
+          { key: "d", src: "images/bronze.png" },
+          { key: "f", src: "images/silver.png" },
+          { key: "g", src: "images/diamond.png" },
+
+          { key: "z", src: "images/platinum.png" },
+          { key: "x", src: "images/crown.png" },
+          { key: "c", src: "images/unicorn.png" },
+          { key: "v", src: "images/blackhorse.png" },
         ];
 
         imageMappings.forEach((mapping) => {
+          const { key, src } = mapping;
+          const alt = mapping.src.split("/").pop().split(".")[0];
           document.write(
-            `<div class="image-container">
-          <img
-            src="${mapping.src}"
-            alt="${mapping.src.split("/").pop().split(".")[0]}"
-            onclick="selectImage('${mapping.src}')"
-          />
-          <span class="keyboard-shortcut">${mapping.key.toUpperCase()}</span>
-        </div>`,
+            `
+            <div class="image-container">
+              <img
+                src="${src}"
+                alt="${alt}"
+                onclick="selectImage('${src}')"
+              />
+              <span class="keyboard-shortcut">
+                ${key.toUpperCase()}
+              </span>
+            </div>
+            `,
           );
         });
       </script>
@@ -78,13 +88,13 @@
             }
           });
         });
-      
-          document.addEventListener("keydown", function (event) {
-            if (event.key === "Escape") {
-              closeImageSelection();
-            }
-          });
-        </script>
+
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "Escape") {
+            closeImageSelection();
+          }
+        });
+      </script>
     </div>
     <script>
       let selectedCell;
@@ -151,7 +161,7 @@
         const imageCount = document.querySelectorAll(
           `img[src='${imageSrc}']`,
         ).length;
-        if (imageSrc === 'images/default.png' || imageCount < 3) {
+        if (imageSrc === "images/default.png" || imageCount < 3) {
           if (selectedCell) {
             selectedCell.innerHTML = `<img src="${imageSrc}" alt="Selected Image">`;
           }
