@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng event survivor - Clan VNClub</title>
+    <style>
+        table {
+            width: 300px;
+            height: 300px;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+
+        td {
+            width: 60px;
+            height: 60px;
+            border: 1px solid black;
+            text-align: center;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+            border-radius: 10px;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .black {
+            background-color: black;
+        }
+
+        #imageSelection {
+            display: none;
+            position: fixed;
+            background-color: white;
+            padding: 10px;
+            border: 1px solid black;
+            z-index: 100;
+            border-radius: 10px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+            max-width: 90%; /* To ensure it fits within smaller screens */
+            max-height: 90%; /* To ensure it fits within smaller screens */
+            overflow-y: auto; /* To handle overflow of content */
+        }
+
+        #imageSelection img {
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            cursor: pointer;
+            object-fit: contain;
+            border-radius: 5px;
+        }
+
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 50;
+            opacity: 0;
+        }
+
+        #overlay.show {
+            display: block;
+            opacity: 1;
+        }
+
+        #resetButton {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+    </style>
+
+    <title>Crown Pair Match - VNClub</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Proxima+Nova">
+    <style>
+        body {
+            font-family: 'Proxima Nova', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center;">Crown Pair Match - VNClub</h1>
+
+    <table id="interactiveTable">
+        <script>
+            const defaultImageSrc = 'images/default.png';
+            for (let i = 0; i < 5; i++) {
+                document.write('<tr>');
+                for (let j = 0; j < 5; j++) {
+                    document.write(`<td><img src="${defaultImageSrc}" alt="Default Image"></td>`);
+                }
+                document.write('</tr>');
+            }
+        </script>
+    </table>
+
+    <button id="resetButton" onclick="resetTable()">Reset</button>
+    <div id="overlay" onclick="closeImageSelection()"></div>
+
+    <div id="imageSelection">
+        <p>Select image:</p>
+        <img src="images/zombie.png" alt="zombie" onclick="selectImage('images/zombie.png')">
+        <img src="images/cat.png" alt="cat" onclick="selectImage('images/cat.png')">
+        <img src="images/bear.png" alt="bear" onclick="selectImage('images/bear.png')">
+        <img src="images/wes.png" alt="wes" onclick="selectImage('images/wes.png')"> <br>
+
+        <img src="images/none.png" alt="none" onclick="selectImage('images/none.png')">
+        <img src="images/book.png" alt="book" onclick="selectImage('images/book.png')">
+        <img src="images/king.png" alt="king" onclick="selectImage('images/king.png')">
+        <img src="images/common.png" alt="common" onclick="selectImage('images/common.png')"> <br>
+
+        <img src="images/robot.png" alt="robot" onclick="selectImage('images/robot.png')">
+        <img src="images/dog.png" alt="dog" onclick="selectImage('images/dog.png')">
+        <img src="images/snake.png" alt="snake" onclick="selectImage('images/snake.png')">
+        <img src="images/default.png" alt="default" onclick="selectImage('images/default.png')"> <br>
+
+        <img src="images/bronze.png" alt="bronze" onclick="selectImage('images/bronze.png')">
+        <img src="images/silver.png" alt="silver" onclick="selectImage('images/silver.png')">
+        <img src="images/diamond.png" alt="diamond" onclick="selectImage('images/diamond.png')">
+        <img src="images/platinum.png" alt="platinum" onclick="selectImage('images/platinum.png')"> <br>
+
+        <img src="images/crown.png" alt="crown" onclick="selectImage('images/crown.png')">
+        <img src="images/unicorn.png" alt="unicorn" onclick="selectImage('images/unicorn.png')">
+        <img src="images/blackhorse.png" alt="den" onclick="selectImage('images/blackhorse.png')">
+        <button onclick="closeImageSelection()">Cancel</button>
+    </div>
+
+    <script>
+        let selectedCell;
+        const cells = document.querySelectorAll('td');
+        cells.forEach(cell => {
+            cell.addEventListener('click', function() {
+                selectedCell = this;
+                openImageSelection();
+            });
+        });
+
+        function openImageSelection(event) {
+            const imageSelection = document.getElementById('imageSelection');
+            const overlay = document.getElementById('overlay');
+            imageSelection.style.display = 'block';
+            overlay.style.display = 'block';
+
+            const rect = selectedCell.getBoundingClientRect();
+            const offsetTop = window.pageYOffset || document.documentElement.scrollTop;
+            const offsetLeft = window.pageXOffset || document.documentElement.scrollLeft;
+
+            imageSelection.style.top = rect.top + offsetTop + 'px';
+            imageSelection.style.left = rect.left + offsetLeft + rect.width + 'px';
+            imageSelection.style.transform = 'none';
+        }
+
+        function closeImageSelection() {
+            document.getElementById('imageSelection').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        function selectImage(imageSrc) {
+            if (selectedCell) {
+                selectedCell.innerHTML = `<img src="${imageSrc}" alt="Selected Image">`;
+            }
+            closeImageSelection();
+        }
+
+        function resetTable() {
+            cells.forEach(cell => {
+                cell.innerHTML = `<img src="${defaultImageSrc}" alt="Default Image">`;
+                cell.classList.remove('black');
+            });
+        }
+    </script>
+</body>
+
+</html>
