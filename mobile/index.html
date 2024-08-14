@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>survivor.io - Crown Pair Match</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Proxima+Nova"
+    />
+  </head>
+  <body>
+    <h1>Crown Pair Match</h1>
+    <table id="interactiveTable">
+      <script language="javascript">
+        const rows = 5;
+        const columns = 5;
+        for (let i = 0; i < rows; i++) {
+          document.write("<tr>");
+          for (let j = 0; j < columns; j++) {
+            document.write(
+              `<td><img src="../images/default.png" alt="Default Image"></td>`,
+            );
+          }
+          document.write("</tr>");
+        }
+      </script>
+    </table>
+    <button id="resetButton" onclick="resetTable()">Reset</button>
+    <div id="overlay" onclick="closeCardDialog()"></div>
+    <!-- dialog -->
+    <div id="selectCardDialog" style="position:fixed; top:20%; left:50%; transform:translateX(-50%); z-index: 1000;">
+      <p>Select image:</p>
+
+      <div class="image-container-placeholder"></div>
+      <div class="button-container">
+        <button id="cancelButton" onclick="closeCardDialog()">Cancel</button>
+      </div>
+    </div>
+
+    <script language="javascript">
+      /**
+       * Image mappings without keyboard shortcuts for mobile.
+       */
+      const imageMappings = [
+        { src: "../images/common.png" },
+        { src: "../images/king.png" },
+        { src: "../images/catnips.png" },
+        { src: "../images/wesson.png" },
+        { src: "../images/tsukuyomi.png" },
+        { src: "../images/yang.png" },
+        { src: "../images/metallica.png" },
+        { src: "../images/plus_one.png" },
+        { src: "../images/crown.png" },
+        { src: "../images/default.png" },
+        { src: "../images/wolf.png" },
+        { src: "../images/snake.png" },
+        { src: "../images/robot.png" },
+        { src: "../images/zombie.png" },
+        { src: "../images/blackhorse.png" },
+        { src: "../images/bronze.png" },
+        { src: "../images/silver.png" },
+        { src: "../images/platinum.png" },
+        { src: "../images/diamond.png" }
+      ];
+
+      imageMappings.forEach((mapping) => {
+        const { src } = mapping;
+        const alt = mapping.src.split("/").pop().split(".")[0];
+        document
+          .querySelector(".image-container-placeholder")
+          .insertAdjacentHTML(
+            "beforeend",
+            `
+          <div class="image-container">
+            <img
+              src="${src}"
+              alt="${alt}"
+              onclick="selectImage('${src}')"
+            />
+          </div>
+        `,
+          );
+      });
+
+      let selectedCell;
+      const cells = document.querySelectorAll("td");
+
+      /**
+       * Add click event listener to each table cell to open the card dialog.
+       */
+      cells.forEach((cell) => {
+        cell.addEventListener("click", function () {
+          selectedCell = this;
+          openCardDialog();
+        });
+      });
+
+      /**
+       * Opens the card selection dialog.
+       */
+      const openCardDialog = () => {
+        const selectCardDialog = document.getElementById("selectCardDialog");
+        const overlay = document.getElementById("overlay");
+        selectCardDialog.style.display = "block";
+        overlay.style.display = "block";
+      };
+
+      /**
+       * Closes the card selection dialog.
+       */
+      const closeCardDialog = () => {
+        document.getElementById("selectCardDialog").style.display = "none";
+        document.getElementById("overlay").style.display = "none";
+      };
+
+      /**
+       * Selects an image and sets it to the selected table cell.
+       * @param {string} imageSrc - The source URL of the image to select.
+       */
+      const selectImage = (imageSrc) => {
+        if (selectedCell) {
+          selectedCell.innerHTML = `<img src="${imageSrc}" alt="Selected Image">`;
+          closeCardDialog();
+        }
+      };
+
+      /**
+       * Resets the table cells to the default image.
+       */
+      const resetTable = () => {
+        const defaultImageSrc = "../images/default.png";
+        cells.forEach((cell) => {
+          cell.innerHTML = `<img src="${defaultImageSrc}" alt="Default Image">`;
+          cell.classList.remove("black");
+        });
+      };
+    </script>
+  </body>
+</html>
