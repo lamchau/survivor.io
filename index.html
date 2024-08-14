@@ -28,6 +28,14 @@
         height: 100%;
         object-fit: cover;
         border-radius: 10px;
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+      }
+
+      img:hover {
+        transform: scale(1.1);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
       }
 
       .black {
@@ -101,6 +109,20 @@
       body {
         font-family: "Proxima Nova", sans-serif;
       }
+      .image-container {
+        display: inline-block;
+        position: relative;
+      }
+
+      .keyboard-shortcut {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        padding: 2px 5px;
+        border-radius: 3px;
+      }
     </style>
   </head>
 
@@ -128,370 +150,161 @@
     <div id="imageSelection">
       <p>Select image:</p>
 
-      <div style="display: inline-block; position: relative">
+      <div class="image-container">
         <img
           src="images/zombie.png"
           alt="zombie"
           onclick="selectImage('images/zombie.png')"
         />
-        <span
-          style="
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 2px 5px;
-            border-radius: 3px;
-          "
-          >Q</span
-        >
+        <span class="keyboard-shortcut">Q</span>
       </div>
-      <div style="display: inline-block; position: relative">
+      <div class="image-container">
         <img
           src="images/cat.png"
           alt="cat"
           onclick="selectImage('images/cat.png')"
         />
-        <span
-          style="
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 2px 5px;
-            border-radius: 3px;
-          "
-          >W</span
-        >
+        <span class="keyboard-shortcut">W</span>
       </div>
-      <div style="display: inline-block; position: relative">
+      <div class="image-container">
         <img
           src="images/bear.png"
           alt="bear"
           onclick="selectImage('images/bear.png')"
         />
-        <span
-          style="
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 2px 5px;
-            border-radius: 3px;
-          "
-          >E</span
-        >
+        <span class="keyboard-shortcut">E</span>
       </div>
-      <div style="display: inline-block; position: relative">
+      <div class="image-container">
         <img
           src="images/wes.png"
           alt="wes"
           onclick="selectImage('images/wes.png')"
         />
-        <span
-          style="
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 2px 5px;
-            border-radius: 3px;
-          "
-          >R</span
-        >
+        <span class="keyboard-shortcut">R</span>
       </div>
 
-      <div style="display: inline-block; position: relative">
+      <div class="image-container">
         <img
           src="images/none.png"
           alt="none"
           onclick="selectImage('images/none.png')"
         />
-        <span
-          style="
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 2px 5px;
-            border-radius: 3px;
-          "
-          >A</span
-        >
+        <span class="keyboard-shortcut">A</span>
       </div>
-      <div style="display: inline-block; position: relative">
+      <div class="image-container">
         <img
           src="images/book.png"
           alt="book"
           onclick="selectImage('images/book.png')"
         />
-        <span
-          style="
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 2px 5px;
-            border-radius: 3px;
-          "
-          >S</span
-        >
+        <span class="keyboard-shortcut">S</span>
       </div>
-      <div style="display: inline-block; position: relative">
+      <div class="image-container">
         <img
           src="images/king.png"
           alt="king"
           onclick="selectImage('images/king.png')"
         />
-        <span
-          style="
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 2px 5px;
-            border-radius: 3px;
-          "
-          >D</span
-        >
+        <span class="keyboard-shortcut">D</span>
       </div>
-      <div style="display: inline-block; position: relative">
+      <div class="image-container">
         <img
           src="images/common.png"
           alt="common"
           onclick="selectImage('images/common.png')"
         />
-        <span
-          style="
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 2px 5px;
-            border-radius: 3px;
-          "
-          >F</span
-        >
+        <span class="keyboard-shortcut">F</span>
       </div>
 
-      <div style="display: inline-block; position: relative">
+      <div class="image-container">
         <img
           src="images/robot.png"
           alt="robot"
           onclick="selectImage('images/robot.png')"
         />
-        <span
-          style="
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 2px 5px;
-            border-radius: 3px;
-          "
-          >Z</span
-        >
+        <span class="keyboard-shortcut">Z</span>
       </div>
-      <div style="display: inline-block; position: relative">
+      <div class="image-container">
         <img
           src="images/dog.png"
           alt="dog"
           onclick="selectImage('images/dog.png')"
         />
-        <span
-          style="
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 2px 5px;
-            border-radius: 3px;
-          "
-          >X</span
-        >
+        <span class="keyboard-shortcut">X</span>
       </div>
-      <div style="display: inline-block; position: relative">
+      <div class="image-container">
         <img
           src="images/snake.png"
           alt="snake"
           onclick="selectImage('images/snake.png')"
         />
-        <span
-          style="
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 2px 5px;
-            border-radius: 3px;
-          "
-          >C</span
-        >
+        <span class="keyboard-shortcut">C</span>
       </div>
-      <div style="display: inline-block; position: relative">
+      <div class="image-container">
         <img
           src="images/default.png"
           alt="default"
           onclick="selectImage('images/default.png')"
         />
-        <span
-          style="
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 2px 5px;
-            border-radius: 3px;
-          "
-          >V</span
-        >
+        <span class="keyboard-shortcut">V</span>
       </div>
 
-      <div style="display: inline-block; position: relative">
+      <div class="image-container">
         <img
           src="images/bronze.png"
           alt="bronze"
           onclick="selectImage('images/bronze.png')"
         />
-        <span
-          style="
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 2px 5px;
-            border-radius: 3px;
-          "
-          >B</span
-        >
+        <span class="keyboard-shortcut">B</span>
       </div>
-      <div style="display: inline-block; position: relative">
+      <div class="image-container">
         <img
           src="images/silver.png"
           alt="silver"
           onclick="selectImage('images/silver.png')"
         />
-        <span
-          style="
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 2px 5px;
-            border-radius: 3px;
-          "
-          >N</span
-        >
+        <span class="keyboard-shortcut">N</span>
       </div>
-      <div style="display: inline-block; position: relative">
+      <div class="image-container">
         <img
           src="images/diamond.png"
           alt="diamond"
           onclick="selectImage('images/diamond.png')"
         />
-        <span
-          style="
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 2px 5px;
-            border-radius: 3px;
-          "
-          >M</span
-        >
+        <span class="keyboard-shortcut">M</span>
       </div>
-      <div style="display: inline-block; position: relative">
+      <div class="image-container">
         <img
           src="images/platinum.png"
           alt="platinum"
           onclick="selectImage('images/platinum.png')"
         />
-        <span
-          style="
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 2px 5px;
-            border-radius: 3px;
-          "
-          >1</span
-        >
+        <span class="keyboard-shortcut">1</span>
       </div>
 
-      <div style="display: inline-block; position: relative">
+      <div class="image-container">
         <img
           src="images/crown.png"
           alt="crown"
           onclick="selectImage('images/crown.png')"
         />
-        <span
-          style="
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 2px 5px;
-            border-radius: 3px;
-          "
-          >2</span
-        >
+        <span class="keyboard-shortcut">2</span>
       </div>
-      <div style="display: inline-block; position: relative">
+      <div class="image-container">
         <img
           src="images/unicorn.png"
           alt="unicorn"
           onclick="selectImage('images/unicorn.png')"
         />
-        <span
-          style="
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 2px 5px;
-            border-radius: 3px;
-          "
-          >3</span
-        >
+        <span class="keyboard-shortcut">3</span>
       </div>
-      <div style="display: inline-block; position: relative">
+      <div class="image-container">
         <img
           src="images/blackhorse.png"
           alt="den"
           onclick="selectImage('images/blackhorse.png')"
         />
-        <span
-          style="
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 2px 5px;
-            border-radius: 3px;
-          "
-          >4</span
-        >
+        <span class="keyboard-shortcut">4</span>
       </div>
       <button onclick="closeImageSelection()">Cancel</button>
 
@@ -593,4 +406,3 @@
     </script>
   </body>
 </html>
-
